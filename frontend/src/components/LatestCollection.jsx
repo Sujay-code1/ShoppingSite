@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectLatestProducts } from '../redux/productsSlice'
+import { Link } from "react-router-dom";
 
 const LatestCollection = () => {
   const latestProducts = useSelector(selectLatestProducts);
@@ -22,6 +23,7 @@ const LatestCollection = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-8">
           
           {latestProducts.map((product) => (
+            <Link key={product._id} to={`/product/${product._id}`}>
             <div
               key={product._id}
               className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-3 sm:p-5 cursor-pointer"
@@ -45,6 +47,7 @@ const LatestCollection = () => {
                 ₹ {product.price}
               </p>
             </div>
+            </Link>
           ))}
 
         </div>

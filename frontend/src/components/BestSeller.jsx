@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectBestSellers } from '../redux/productsSlice'
+import { Link } from "react-router-dom";
 
 const BestSeller = () => {
   const bestSeller = useSelector(selectBestSellers)
@@ -23,6 +24,7 @@ const BestSeller = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-8">
           
           {bestSeller.map((product) => (
+            <Link key={product._id} to={`/product/${product._id}`}>
             <div
               key={product._id}
               className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-3 sm:p-5 cursor-pointer"
@@ -46,6 +48,7 @@ const BestSeller = () => {
                 ₹ {product.price}
               </p>
             </div>
+            </Link>
           ))}
 
         </div>

@@ -1,11 +1,12 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link,  useNavigate } from 'react-router-dom'
 import {assets} from '../assets/assets'
 import { useState } from 'react'
 
 function NavBar() {
 
     const[visible, setVisible] = useState(false);
+    const navigate = useNavigate();
 
   return (
     <div className='flex items-center justify-between py-6 font-medium'>
@@ -36,7 +37,7 @@ function NavBar() {
       </ul>
 
       <div className='flex items-center gap-6'>
-          <img src={assets.search_icon} alt='search' className='w-7 cursor-pointer'/>
+               <img src={assets.search_icon} alt='search' className='w-7 cursor-pointer ' onClick={()=>navigate(`/search`)}/>
           <div className='group relative'>
                <img src={assets.profile_icon} alt='profile' className='w-7 cursor-pointer'/>
                <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>

@@ -3,6 +3,8 @@ import Hero from '../components/Hero'
 import LatestCollection from '../components/LatestCollection'
 import BestSeller from '../components/BestSeller'
 import Policis from '../components/Policis'
+import Subscription from '../components/Subscription'
+import Footer from '../components/Footer'
 
 
 function Home() {
@@ -19,6 +21,10 @@ function Home() {
        <br/>
        <br/>
        <Policis/>
+       <br/>
+       <br/>
+       <Subscription/>
+       
     </div>
   )
 }
