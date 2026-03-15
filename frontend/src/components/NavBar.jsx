@@ -2,11 +2,19 @@ import React from 'react'
 import { NavLink, Link,  useNavigate } from 'react-router-dom'
 import {assets} from '../assets/assets'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+
 
 function NavBar() {
 
     const[visible, setVisible] = useState(false);
     const navigate = useNavigate();
+
+    // Get cart state from Redux
+  const cart = useSelector((state) => state.cart);
+
+  // Calculate total quantity
+  const cartCount = cart.reduce((total, item) => total + item.qty, 0);
 
   return (
     <div className='flex items-center justify-between py-6 font-medium'>
@@ -51,7 +59,7 @@ function NavBar() {
           </div>
           <Link to='/cart' className='relative'>
                 <img src={assets.cart_icon} alt='cart' className='w-7 cursor-pointer'/>
-                <p className='absolute -top-2 -right-2 bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-xs'>5</p>
+                <p className='absolute -top-2 -right-2 bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-xs'>{cartCount}</p>
           </Link>
 
           <img onClick={()=>setVisible(true)} src={assets.menu_icon} alt='menu' className='w-5 cursor-pointer sm:hidden'/>

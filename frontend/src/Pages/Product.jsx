@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectAllProducts } from "../redux/productsSlice";
+import { useDispatch } from "react-redux";
+import { AddItem } from "../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Policies from "../components/Policis";
 
 
@@ -11,7 +15,25 @@ function Product() {
   const products = useSelector(selectAllProducts);
 
   const product = products.find((item) => item._id === id);
+  
+  const dispatch = useDispatch();
+const navigate = useNavigate();
+const [selectedSize, setSelectedSize] = useState("M");
 
+const handleAddToCart = () => {
+
+  dispatch(
+    AddItem({
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image[0],
+      size: selectedSize
+    })
+  );
+
+  navigate("/cart");
+};
 
 
   useEffect(() => {
@@ -97,11 +119,13 @@ function Product() {
             {["S", "M", "L", "XL"].map((size) => (
 
               <button
-                key={size}
-                className="border px-6 py-2 rounded-md text-lg hover:bg-black hover:text-white transition"
-              >
-                {size}
-              </button>
+      key={size}
+      onClick={() => setSelectedSize(size)}
+      className={`border px-6 py-2 rounded-md text-lg transition 
+      ${selectedSize === size ? "bg-black text-white" : "hover:bg-black hover:text-white"}`}
+    >
+      {size}
+    </button>
 
             ))}
 
@@ -110,7 +134,8 @@ function Product() {
         </div>
 
         {/* Add To Cart */}
-        <button className="bg-black text-white py-4 text-lg rounded-lg hover:bg-gray-800 transition mt-4 w-[220px]">
+        <button onClick={handleAddToCart}
+ className="bg-black text-white py-4 text-lg rounded-lg hover:bg-gray-800 transition mt-4 w-[220px]">
           Add To Cart
         </button>
 
