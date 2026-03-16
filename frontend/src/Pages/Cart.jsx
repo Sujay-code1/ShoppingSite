@@ -2,10 +2,12 @@ import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IncrementQty, DecrementQty, RemoveItem } from "../redux/cartSlice";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   // Subtotal
   const subTotal = useMemo(() => {
@@ -138,8 +140,8 @@ function Cart() {
 
             </div>
 
-            <button className="w-full bg-black text-white py-3 rounded-lg mt-6 hover:bg-gray-800 transition">
-              Place Order
+            <button  onClick={()=>navigate("/place-order")} className="w-full bg-black text-white py-3 rounded-lg mt-6 hover:bg-gray-800 transition">
+              Proceed To Checkout
             </button>
 
           </div>
